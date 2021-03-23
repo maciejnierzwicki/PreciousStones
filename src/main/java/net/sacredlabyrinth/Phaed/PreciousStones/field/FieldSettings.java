@@ -248,11 +248,13 @@ public class FieldSettings {
         loadBoolean("prevent-portal-destination");
         loadBoolean("prevent-potion-splash");
         loadBoolean("prevent-vehicle-enter");
+        loadBoolean("prevent-vehicle-push");
         loadBoolean("prevent-vehicle-exit");
         loadBoolean("prevent-item-frame-take");
         loadBoolean("protect-armor-stands");
         loadBoolean("prevent-entity-interact");
         loadBoolean("protect-animals");
+        loadBoolean("protect-watermobs");
         loadBoolean("protect-villagers");
         loadBoolean("protect-crops");
         loadBoolean("protect-mobs");

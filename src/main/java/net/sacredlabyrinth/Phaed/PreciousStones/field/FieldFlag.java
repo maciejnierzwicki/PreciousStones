@@ -21,6 +21,7 @@ public enum FieldFlag {
     PREVENT_USE_DOORS,
     PREVENT_USE_REDSTONE,
     PREVENT_VEHICLE_DESTROY,
+    PREVENT_VEHICLE_PUSH,
     PREVENT_VEHICLE_CREATE,
     PREVENT_ENDERMAN_DESTROY,
     PREVENT_EXPLOSIONS,
@@ -47,6 +48,7 @@ public enum FieldFlag {
     PROTECT_ARMOR_STANDS,
     PREVENT_ENTITY_INTERACT,
     PROTECT_ANIMALS,
+    PROTECT_WATERMOBS,
     PROTECT_MOBS,
     PROTECT_VILLAGERS,
     PROTECT_CROPS,
@@ -189,6 +191,7 @@ public enum FieldFlag {
                     FieldFlag.PREVENT_ENTITY_INTERACT,
                     FieldFlag.PROTECT_ANIMALS,
                     FieldFlag.PROTECT_CROPS,
+                    FieldFlag.PROTECT_WATERMOBS,
                     FieldFlag.PROTECT_MOBS,
                     FieldFlag.PROTECT_INVENTORIES,
                     FieldFlag.PROTECT_VILLAGERS,
@@ -225,6 +228,7 @@ public enum FieldFlag {
                     FieldFlag.NO_PLAYER_SPRINT,
                     FieldFlag.PREVENT_VEHICLE_ENTER,
                     FieldFlag.PREVENT_VEHICLE_EXIT,
+                    FieldFlag.PREVENT_VEHICLE_PUSH,
                     FieldFlag.COMMAND_BLACKLIST,
                     FieldFlag.NO_RESIZE
             };
