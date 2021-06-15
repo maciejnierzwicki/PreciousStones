@@ -10,7 +10,7 @@ Self-service protection for PVP Minecraft servers
 
 ## Server Version:
 
-The latest versions of this plugin are only compatible with 1.16.* ! If you want to get the latest 1.15.2 supported version, please check on [releases](https://github.com/elBukkit/PreciousStones/releases/tag/1.15.2)!
+The latest versions of this plugin are only compatible with 1.17.* ! If you want to get the latest 1.16.5 supported version, please check on [releases](https://github.com/elBukkit/PreciousStones/releases/tag/1.16.5)!
 
 ## Note:
 
