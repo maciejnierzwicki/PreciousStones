@@ -4,7 +4,7 @@ main: net.sacredlabyrinth.Phaed.PreciousStones.PreciousStones
 version: ${project.version}
 api-version: 1.17
 dev-url: https://github.com/elBukkit/PreciousStones
-load: 'postworld'
+load: POSTWORLD
 softdepend: [Permissions, PermissionsBukkit, SimpleClans, Vault, CombatTag, WorldGuard, LWC, Lockette, mcMMO, SCCore, WorldEdit]
 commands:
   ps:
@@ -141,8 +141,6 @@ permissions:
     description: Bypasses on-disabled flags
   preciousstones.bypass.entryalert:
     description: Bypasses entry alert messages
-  preciousstones.bypass.teleport:
-    description: Bypasses teleport flags
   preciousstones.bypass.toggle:
     description: Can toggle bypass mode
   preciousstones.bypass.commandblacklist:
