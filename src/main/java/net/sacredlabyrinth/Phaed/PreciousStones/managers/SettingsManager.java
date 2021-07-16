@@ -1004,6 +1004,17 @@ public final class SettingsManager {
     }
 
     /**
+     * Returns all the field setting names
+     */
+    public List<String> getFieldSettingNames() {
+        List<String> names = new ArrayList<>();
+        for (FieldSettings fs : fieldDefinitions.values()) {
+            names.add(fs.getTitle());
+        }
+        return names;
+    }
+
+    /**
      * Get a single field by name
      *
      * @return

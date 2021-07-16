@@ -21,6 +21,7 @@ import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -28,7 +29,7 @@ import java.util.*;
 /**
  * @author phaed
  */
-public final class CommandManager implements CommandExecutor {
+public final class CommandManager implements TabExecutor {
     private PreciousStones plugin;
 
     /**
@@ -100,7 +101,7 @@ public final class CommandManager implements CommandExecutor {
                         }
                         return true;
                     } else if (cmd.equalsIgnoreCase(ChatHelper.format("commandAllow")) && plugin.getPermissionsManager().has(player, "preciousstones.whitelist.allow") && hasplayer) {
-						if (args.length >= 2) {
+						if (args.length >= 1) {
 							Field field = plugin.getForceFieldManager().getOneOwnedField(block, player, FieldFlag.ALL);
 
 							if (field != null) {
@@ -125,7 +126,7 @@ public final class CommandManager implements CommandExecutor {
 
 								boolean isGuest = false;
 								String playerName = args[0];
-								String member = args[1];
+								String member = args.length >= 2 ? args[1] : "guest";
 								if (member.equalsIgnoreCase("guest") || member.equalsIgnoreCase("g")) {
 									isGuest = true;
 								} else if (member.equalsIgnoreCase("coowner") || member.equalsIgnoreCase("co") || member.equalsIgnoreCase("c")) {
@@ -2099,5 +2100,72 @@ public final class CommandManager implements CommandExecutor {
         }
 
         return false;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        String commandName = command.getName();
+        if (!commandName.equalsIgnoreCase("ps")) {
+            return null;
+        }
+
+        String completeCommand = args.length > 0 ? args[args.length - 1] : "";
+
+        completeCommand = completeCommand.toLowerCase();
+        Collection<String> allOptions = onTabComplete(sender, command.getName(), args);
+        List<String> options = new ArrayList<>();
+        for (String option : allOptions) {
+            String lowercase = option.toLowerCase();
+            if (lowercase.startsWith(completeCommand)) {
+                options.add(option);
+            }
+        }
+        Collections.sort(options);
+        return options;
+    }
+
+    public Collection<String> onTabComplete(CommandSender sender, String commandName, String[] args) {
+        List<String> options = new ArrayList<>();
+        if (args.length == 1) {
+            options.add(ChatHelper.format("commandAllow"));
+            options.add(ChatHelper.format("commandAllowall"));
+            options.add(ChatHelper.format("commandRemove"));
+            options.add(ChatHelper.format("commandRemoveall"));
+            options.add(ChatHelper.format("commandTake"));
+            options.add(ChatHelper.format("commandGive"));
+            options.add(ChatHelper.format("commandAllowed"));
+            options.add(ChatHelper.format("commandWho"));
+            options.add(ChatHelper.format("commandSetname"));
+            options.add(ChatHelper.format("commandSetradius"));
+            options.add(ChatHelper.format("commandDisable"));
+            options.add(ChatHelper.format("commandEnable"));
+            options.add(ChatHelper.format("commandToggle"));
+        } else if (args.length == 2) {
+            String subCommand = args[0];
+            if (subCommand.equals(ChatHelper.format("commandGive"))) {
+                options.addAll(getPlayerNames());
+                options.addAll(plugin.getSettingsManager().getFieldSettingNames());
+            } else if (subCommand.equals(ChatHelper.format("commandAllow")) || subCommand.equals(ChatHelper.format("commandRemove"))) {
+                options.addAll(getPlayerNames());
+            }
+        } else if (args.length == 3) {
+            String subCommand = args[0];
+            if (subCommand.equals(ChatHelper.format("commandGive"))) {
+                options.addAll(plugin.getSettingsManager().getFieldSettingNames());
+            } else if (subCommand.equals(ChatHelper.format("commandAllow"))) {
+                options.add("guest");
+                options.add("coowner");
+            }
+        }
+        return options;
+    }
+
+    public Collection<String> getPlayerNames() {
+        List<String> playerNames = new ArrayList<>();
+        Collection<? extends Player> players = plugin.getServer().getOnlinePlayers();
+        for (Player player : players) {
+            playerNames.add(player.getName());
+        }
+        return playerNames;
     }
 }

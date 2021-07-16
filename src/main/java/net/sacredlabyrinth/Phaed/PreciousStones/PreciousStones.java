@@ -208,6 +208,7 @@ public class PreciousStones extends JavaPlugin {
 
     private void registerCommands() {
         getCommand("ps").setExecutor(getCommandManager());
+        getCommand("ps").setTabCompleter(getCommandManager());
     }
 
     /**
