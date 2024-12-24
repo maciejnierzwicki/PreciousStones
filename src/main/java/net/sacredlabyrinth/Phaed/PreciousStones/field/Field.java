@@ -568,9 +568,18 @@ public class Field extends AbstractVec implements Comparable<Field> {
         if (clan != null) {
             return allowed.contains("c:" + clan);
         }
+        
 
         // TODO: This method is very slow and can cause a lockup on the server thread
-        OfflinePlayer offlinePlayer = PreciousStones.getInstance().getServer().getOfflinePlayer(target);
+        //OfflinePlayer offlinePlayer = PreciousStones.getInstance().getServer().getOfflinePlayer(target);
+        
+        OfflinePlayer offlinePlayer = null;
+        for(OfflinePlayer storedOfflinePlayer : PreciousStones.getInstance().getServer().getOfflinePlayers()) {
+        	if(storedOfflinePlayer.getName().equalsIgnoreCase(target)) {
+        		offlinePlayer = storedOfflinePlayer;
+        		break;
+        	}
+        }
 
         if (offlinePlayer != null) {
             ScoreboardManager manager = Bukkit.getScoreboardManager();
