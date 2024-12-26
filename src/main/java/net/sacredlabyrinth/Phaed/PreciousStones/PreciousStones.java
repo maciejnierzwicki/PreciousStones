@@ -8,6 +8,8 @@ import net.sacredlabyrinth.Phaed.PreciousStones.managers.*;
 import net.sacredlabyrinth.Phaed.PreciousStones.storage.StorageManager;
 import net.sacredlabyrinth.Phaed.PreciousStones.uuid.UUIDMigration;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -110,6 +112,25 @@ public class PreciousStones extends JavaPlugin {
      */
     public static void log(Object msg, Object... arg) {
         log(Level.INFO, msg, arg);
+    }
+    
+    
+    /**
+     * 
+     * @param playerName
+     * @return {@link OfflinePlayer} player (online or offline) with given name (case insensitive).<br>Returns null when player hasn't played before on this server.
+     */
+    public static OfflinePlayer getSafeOfflinePlayer(String playerName) {
+        OfflinePlayer player = Bukkit.getPlayer(playerName);
+        if(player != null) { return player; }
+        
+        for(OfflinePlayer storedOfflinePlayer : PreciousStones.getInstance().getServer().getOfflinePlayers()) {
+        	if(storedOfflinePlayer.getName().equalsIgnoreCase(playerName)) {
+        		player = storedOfflinePlayer;
+        		break;
+        	}
+        }
+        return player;
     }
 
     /**

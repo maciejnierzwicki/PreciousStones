@@ -262,8 +262,8 @@ public final class ForceFieldManager {
         // add allowed team
 
         if (plugin.getSettingsManager().isAutoAddTeam()) {
-            OfflinePlayer offlinePlayer = plugin.getServer().getOfflinePlayer(player.getName());
-
+            OfflinePlayer offlinePlayer = PreciousStones.getSafeOfflinePlayer(player.getName());
+            
             if (offlinePlayer != null) {
                 ScoreboardManager manager = Bukkit.getScoreboardManager();
                 Scoreboard board = manager.getMainScoreboard();
@@ -755,8 +755,10 @@ public final class ForceFieldManager {
                 if (target.contains("t:")) {
                     String tm = target.substring(2);
 
-                    OfflinePlayer offlinePlayer = PreciousStones.getInstance().getServer().getOfflinePlayer(field.getOwner());
-
+                    //OfflinePlayer offlinePlayer = PreciousStones.getInstance().getServer().getOfflinePlayer(field.getOwner());
+                    String fieldOwner = field.getOwner();
+                    OfflinePlayer offlinePlayer = PreciousStones.getSafeOfflinePlayer(fieldOwner);
+                    
                     if (offlinePlayer != null) {
                         ScoreboardManager manager = Bukkit.getScoreboardManager();
                         Scoreboard board = manager.getMainScoreboard();
@@ -2896,7 +2898,7 @@ public final class ForceFieldManager {
 
         // verify owner name
 
-        OfflinePlayer owner = plugin.getServer().getOfflinePlayer(ownerName);
+        OfflinePlayer owner = PreciousStones.getSafeOfflinePlayer(ownerName);
 
         if (fs.hasDefaultFlag(FieldFlag.NO_OWNER)) {
             ownerName = "Server";
@@ -2973,7 +2975,7 @@ public final class ForceFieldManager {
         // add allowed team
 
         if (plugin.getSettingsManager().isAutoAddTeam()) {
-            OfflinePlayer offlinePlayer = plugin.getServer().getOfflinePlayer(owner.getName());
+            OfflinePlayer offlinePlayer = PreciousStones.getSafeOfflinePlayer(owner.getName());
 
             if (offlinePlayer != null) {
                 ScoreboardManager manager = Bukkit.getScoreboardManager();

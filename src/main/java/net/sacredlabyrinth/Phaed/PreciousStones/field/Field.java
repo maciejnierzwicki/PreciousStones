@@ -573,13 +573,7 @@ public class Field extends AbstractVec implements Comparable<Field> {
         // TODO: This method is very slow and can cause a lockup on the server thread
         //OfflinePlayer offlinePlayer = PreciousStones.getInstance().getServer().getOfflinePlayer(target);
         
-        OfflinePlayer offlinePlayer = null;
-        for(OfflinePlayer storedOfflinePlayer : PreciousStones.getInstance().getServer().getOfflinePlayers()) {
-        	if(storedOfflinePlayer.getName().equalsIgnoreCase(target)) {
-        		offlinePlayer = storedOfflinePlayer;
-        		break;
-        	}
-        }
+        OfflinePlayer offlinePlayer = PreciousStones.getSafeOfflinePlayer(target);
 
         if (offlinePlayer != null) {
             ScoreboardManager manager = Bukkit.getScoreboardManager();

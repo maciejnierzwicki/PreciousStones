@@ -70,7 +70,9 @@ public final class SimpleClansManager {
      */
     public void clanAnnounce(String playerName, String message) {
         if (hasSimpleClans()) {
-        	OfflinePlayer player = Bukkit.getOfflinePlayer(playerName);
+            OfflinePlayer player = PreciousStones.getSafeOfflinePlayer(playerName);
+        	
+        	
 	        	if (player != null) {
 	            net.sacredlabyrinth.phaed.simpleclans.ClanPlayer cp = simpleClans.getClanManager().getClanPlayer(player);
 	
@@ -105,7 +107,8 @@ public final class SimpleClansManager {
      */
     public boolean isAnyOnline(String playerName) {
         if (hasSimpleClans()) {
-        	OfflinePlayer player = Bukkit.getOfflinePlayer(playerName);
+            OfflinePlayer player = PreciousStones.getSafeOfflinePlayer(playerName);
+        	
         	if (player != null) {
 	            net.sacredlabyrinth.phaed.simpleclans.ClanPlayer cp = simpleClans.getClanManager().getClanPlayer(player);
 	
@@ -129,8 +132,9 @@ public final class SimpleClansManager {
      */
     public boolean inWar(Field field, String offenderName) {
         if (hasSimpleClans()) {
-        	OfflinePlayer p = Bukkit.getOfflinePlayer(offenderName);
-        	OfflinePlayer pOwner = Bukkit.getOfflinePlayer(field.getOwner());
+            OfflinePlayer p = PreciousStones.getSafeOfflinePlayer(offenderName);
+            OfflinePlayer pOwner = PreciousStones.getSafeOfflinePlayer(field.getOwner());
+        	
         	if (p != null && pOwner != null) {
 	            net.sacredlabyrinth.phaed.simpleclans.ClanPlayer cp = simpleClans.getClanManager().getClanPlayer(p);
 	            net.sacredlabyrinth.phaed.simpleclans.ClanPlayer cpOwner = simpleClans.getClanManager().getClanPlayer(pOwner);
@@ -162,7 +166,8 @@ public final class SimpleClansManager {
             Player player = plugin.getServer().getPlayerExact(playerName);
 
             if (player != null) {
-            	OfflinePlayer pOwner = Bukkit.getOfflinePlayer(owner);
+                OfflinePlayer pOwner = PreciousStones.getSafeOfflinePlayer(owner);
+            	
             	if (pOwner != null) {
 	                net.sacredlabyrinth.phaed.simpleclans.ClanPlayer cpOwner = simpleClans.getClanManager().getClanPlayer(pOwner);
 	
@@ -184,8 +189,9 @@ public final class SimpleClansManager {
      */
     public boolean isClanMate(String playerOne, String playerTwo) {
         if (hasSimpleClans()) {
-        	OfflinePlayer p1 = Bukkit.getOfflinePlayer(playerOne);
-        	OfflinePlayer p2 = Bukkit.getOfflinePlayer(playerTwo);
+            OfflinePlayer p1 = PreciousStones.getSafeOfflinePlayer(playerOne);
+            OfflinePlayer p2 = PreciousStones.getSafeOfflinePlayer(playerTwo);
+        	
         	if (p1 != null && p2 != null) {
 	            net.sacredlabyrinth.phaed.simpleclans.ClanPlayer cp1 = simpleClans.getClanManager().getClanPlayer(p1);
 	            net.sacredlabyrinth.phaed.simpleclans.ClanPlayer cp2 = simpleClans.getClanManager().getClanPlayer(p2);
@@ -210,7 +216,9 @@ public final class SimpleClansManager {
      */
     public boolean isInClan(String playerName, String clanName) {
         if (hasSimpleClans()) {
-        	OfflinePlayer player = Bukkit.getOfflinePlayer(playerName);
+        	
+            OfflinePlayer player = PreciousStones.getSafeOfflinePlayer(playerName);
+        	
         	if (player != null) {
 	            net.sacredlabyrinth.phaed.simpleclans.ClanPlayer cp = simpleClans.getClanManager().getClanPlayer(player);
 	
@@ -235,7 +243,8 @@ public final class SimpleClansManager {
     public String getClan(String target, boolean isPlayer) {
         if (hasSimpleClans()) {
             if (isPlayer) {
-                OfflinePlayer player = Bukkit.getOfflinePlayer(target);
+                //OfflinePlayer player = Bukkit.getOfflinePlayer(target);
+                OfflinePlayer player = PreciousStones.getSafeOfflinePlayer(target);
                 net.sacredlabyrinth.phaed.simpleclans.ClanPlayer cp = simpleClans.getClanManager().getClanPlayer(player);
 
                 if (cp != null) {
